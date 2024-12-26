@@ -102,13 +102,21 @@ def get_lifespan(*, fix_migration=False, version=None):
         else:
             rprint("[bold green]Starting Langflow...[/bold green]")
         try:
+            rprint("[bold green]Initializing services...[/bold green]")
             await initialize_services(fix_migration=fix_migration)
+            rprint("[bold green]Setting up LLM caching...[/bold green]")
             setup_llm_caching()
+            rprint("[bold green]Initializing super user...[/bold green]")
             await initialize_super_user_if_needed()
+            rprint("[bold green]Caching all types...[/bold green]")
             all_types_dict = await get_and_cache_all_types_dict(get_settings_service())
+            rprint("[bold green]Creating starter projects...[/bold green]")
             await create_or_update_starter_projects(all_types_dict)
+            rprint("[bold green]Starting telemetry service...[/bold green]")
             telemetry_service.start()
+            rprint("[bold green]Loading flows from directory...[/bold green]")
             await load_flows_from_directory()
+            rprint("[bold green]Langflow startup complete[/bold green]")
             yield
 
         except Exception as exc:
