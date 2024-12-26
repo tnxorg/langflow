@@ -1,3 +1,6 @@
 from .agent import AgentComponent
-
-__all__ = ["AgentComponent"]
+from .entry_agent import EntryAgentComponent
+__all__ = [
+    "AgentComponent",
+    "EntryAgentComponent",
+]
