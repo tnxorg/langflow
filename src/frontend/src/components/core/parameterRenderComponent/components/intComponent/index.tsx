@@ -1,12 +1,10 @@
+import {
+  NumberInputField,
+  NumberInputLabel,
+  NumberInputRoot,
+} from "@/components/ui/number-input";
 import { ICON_STROKE_WIDTH } from "@/constants/constants";
 import { cn } from "@/utils/utils";
-import {
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-} from "@chakra-ui/number-input";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { handleKeyDown } from "../../../../../utils/reactflowUtils";
@@ -81,7 +79,7 @@ export default function IntComponent({
 
   return (
     <div className="w-full">
-      <NumberInput
+      <NumberInputRoot
         id={id}
         step={getStepValue()}
         min={getMinValue()}
@@ -89,6 +87,7 @@ export default function IntComponent({
         onChange={handleNumberChange}
         value={value ?? ""}
       >
+        <NumberInputLabel />
         <NumberInputField
           className={getInputClassName()}
           onChange={handleChangeInput}
@@ -99,21 +98,7 @@ export default function IntComponent({
           data-testid={id}
           ref={inputRef}
         />
-        <NumberInputStepper className={stepperClassName}>
-          <NumberIncrementStepper className={incrementStepperClassName}>
-            <PlusIcon
-              className={iconClassName}
-              strokeWidth={ICON_STROKE_WIDTH}
-            />
-          </NumberIncrementStepper>
-          <NumberDecrementStepper className={decrementStepperClassName}>
-            <MinusIcon
-              className={iconClassName}
-              strokeWidth={ICON_STROKE_WIDTH}
-            />
-          </NumberDecrementStepper>
-        </NumberInputStepper>
-      </NumberInput>
+      </NumberInputRoot>
     </div>
   );
 }

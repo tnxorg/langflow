@@ -1,11 +1,9 @@
-import { cn } from "@/utils/utils";
 import {
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
   NumberInputField,
-  NumberInputStepper,
-} from "@chakra-ui/number-input";
+  NumberInputLabel,
+  NumberInputRoot,
+} from "@/components/ui/number-input";
+import { cn } from "@/utils/utils";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { handleKeyDown } from "../../../../../utils/reactflowUtils";
@@ -73,7 +71,7 @@ export default function FloatComponent({
 
   return (
     <div className="w-full">
-      <NumberInput
+      <NumberInputRoot
         id={id}
         step={step}
         min={min}
@@ -81,6 +79,7 @@ export default function FloatComponent({
         onChange={handleNumberChange}
         value={value ?? ""}
       >
+        <NumberInputLabel />
         <NumberInputField
           className={getInputClassName()}
           onChange={handleChangeInput}
@@ -91,15 +90,7 @@ export default function FloatComponent({
           data-testid={id}
           ref={inputRef}
         />
-        <NumberInputStepper className={stepperClassName}>
-          <NumberIncrementStepper className={incrementStepperClassName}>
-            <PlusIcon className={iconClassName} />
-          </NumberIncrementStepper>
-          <NumberDecrementStepper className={decrementStepperClassName}>
-            <MinusIcon className={iconClassName} />
-          </NumberDecrementStepper>
-        </NumberInputStepper>
-      </NumberInput>
+      </NumberInputRoot>
     </div>
   );
 }
